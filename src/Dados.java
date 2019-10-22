@@ -1,21 +1,24 @@
 
 public class Dados {
 	
-	private byte PrimerDado;
-	private byte SegundoDado;
-	private byte Resultado;
+	private byte primerDado;
+	private byte segundoDado;
+	private byte resultado;
 	
 	public Dados() {
 		
-		 PrimerDado=(byte)(Math.random() * 6 + 1 );
-		 SegundoDado=(byte)(Math.random() * 6 + 1);
-		 Resultado = (byte)(PrimerDado + SegundoDado);
+		 primerDado=(byte)(Math.random() * 6 + 1 );
+		 segundoDado=(byte)(Math.random() * 6 + 1);
+		 resultado = (byte)(primerDado + segundoDado);
 		 
 	}
 	
-	public String TirarDados() {
-		return "En el primer dado ha salido un "+ PrimerDado + "\n" + "En el segundo dado ha salido un " + SegundoDado + "\n" + "El resultado es " + Resultado;
+	public String tirarDados() {
+		return "En el primer dado ha salido un "+ primerDado + "\n" + "En el segundo dado ha salido un " + segundoDado + "\n" + "El resultado es " + resultado;
 		
+	}
+	public int dameResulDados(){
+		return resultado;
 	}
 		
 	
