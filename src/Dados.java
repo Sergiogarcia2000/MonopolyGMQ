@@ -12,16 +12,9 @@ public class Dados {
 		 Resultado = (byte)(PrimerDado + SegundoDado);
 		 
 	}
-	public int TirarPrimerDado() {
-		return PrimerDado;
-		
-	}
-	public int TirarSegundoDado() {
-		return SegundoDado;
-		
-	}
-	public int TirarDados() {
-		return Resultado;
+	
+	public String TirarDados() {
+		return "En el primer dado ha salido un "+ PrimerDado + "\n" + "En el segundo dado ha salido un " + SegundoDado + "\n" + "El resultado es " + Resultado;
 		
 	}
 		

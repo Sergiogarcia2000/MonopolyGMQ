@@ -5,7 +5,7 @@ public class main {
 		// TODO Auto-generated method stub
 		
 		Dados Dado= new Dados();
-		System.out.println("En el primer dado ha salido un "+ Dado.TirarPrimerDado() +"\n" + "En el segundo dado ha salido un "+ Dado.TirarSegundoDado() + "\n" + "El resultado es " + Dado.TirarDados());
+		System.out.println(Dado.TirarDados());
 	
 	}
 
