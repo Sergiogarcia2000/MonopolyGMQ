@@ -9,6 +9,9 @@ public class Tablero {
 	
 	private int Precio = 500;
 	
+	
+	// Método constructor del tablero	
+	
 	public Tablero() {
 		
 		for (int i = 0; i<lugares.length; i++) {
@@ -19,6 +22,8 @@ public class Tablero {
 	
 	}
 	
+	
+	// Método que muestra la informacion de la casilla
 	public void info(int pos) {
 		
 		for (Casillas c: table) {
@@ -29,15 +34,17 @@ public class Tablero {
 		
 	}
 	
-	
+	// Método que devuelve booleana dependiendo del estado de la casilla
 	public boolean comprada(int pos) {
 		return table.get(pos).estaComprada();
 	}
 	
+	// Método que devuelve la renta de la casilla
 	public int renta(int pos) {
 		return table.get(pos).dameRenta();
 	}
 	
+	// Método que edita la casilla a comprada
 	public void editarComprada(int pos) {
 		table.get(pos).editarComprada();
 	}

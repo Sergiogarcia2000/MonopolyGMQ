@@ -25,10 +25,13 @@ public class Casillas {
 		return this.renta;
 	}
 	
+	
+	// Método que devuelve una booleana sobre el estado
 	public boolean estaComprada() {
 		return this.estaComprada;
 	}
 	
+	// Método que cambia el valor
 	public void editarComprada() {
 		estaComprada = true;
 	}
