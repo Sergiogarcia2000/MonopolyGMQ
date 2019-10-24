@@ -33,7 +33,7 @@ public class Jugadores {
 	}
 	//Getter para obtener el dinero
 	public int dameDinero() {
-		return  dinero;
+		return dinero;
 		
 	}
 	public String dameNombre() {
