@@ -47,12 +47,11 @@ public class main {
 			//comprobacion si esta comprada la posicion
 			if(tablero.comprada(jugador[dadoComienzo].damePosicion())) {
 				
-				
 				for (int i = 0 ; i <= numJugadores-1 ; i++) {
 					for(int j = 0;j <= 39;j++) {
 						if (jugador[i].dameCasillaEnPropiedad(j) == jugador[dadoComienzo].damePosicion()){
 							jugador[i].editarDinero(jugador[i].dameDinero()+ tablero.renta(dadoComienzo));
-							jugador[dadoComienzo].editarDinero(jugador[dadoComienzo].dameDinero() - tablero.renta(dadoComienzo));
+							jugador[dadoComienzo].editarDinero(jugador[dadoComienzo].dameDinero() - tablero.renta(jugador[dadoComienzo].damePosicion()));
 						}
 					}
 					
@@ -72,6 +71,18 @@ public class main {
 						System.out.println("Te queda "+ jugador[dadoComienzo].dameDinero() + "€");
 				}
 			}
+			
+			if (tablero.comprada(jugador[dadoComienzo].damePosicion()) == true && tablero.dameNivel(jugador[dadoComienzo].damePosicion()) <= 3) {
+
+				int mejorar = JOptionPane.showOptionDialog(null, "¿Quiere mejorar la casilla?", "Casilla sin mejorar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Si", "No"}, null);	 
+				
+				if (mejorar == 0) {
+					tablero.mejorarNivel(jugador[dadoComienzo].damePosicion());
+				}
+	
+			}
+			
+			
 			if(dadoComienzo < numJugadores-1) {
 				dadoComienzo+=1;
 			}else { 
