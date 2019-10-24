@@ -4,6 +4,7 @@ public class Casillas {
 	private String casilla;
 	private int renta;
 	private int posicion;
+	private int nivel = 1;
 	private boolean estaComprada = false;
 	
 	// Método constructor
@@ -25,6 +26,15 @@ public class Casillas {
 		return this.renta;
 	}
 	
+	public int dameNivel() {
+		return this.nivel;
+	}
+	
+	public void mejorarNivel() {
+		this.nivel++;
+		this.renta = this.renta * this.nivel;
+	}
+	
 	
 	// Método que devuelve una booleana sobre el estado
 	public boolean estaComprada() {
@@ -33,7 +43,7 @@ public class Casillas {
 	
 	// Método que cambia el valor
 	public void editarComprada() {
-		estaComprada = true;
+		this.estaComprada = true;
 	}
 	
 	
@@ -41,7 +51,7 @@ public class Casillas {
 	// Método que permite imprimir como string toda la informacion de una casilla
 	@Override
 	public String toString() {
-		return casilla + " Renta: " + renta + " Posición: " + "Está comprada: " + estaComprada;
+		return casilla + " Renta: " + renta + " Posición: " + posicion + " Está comprada: " + estaComprada + " nivel: " + nivel;
 	}
 	
 }
