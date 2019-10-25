@@ -75,7 +75,7 @@ public class main {
 					
 				}
 				if (pagado) {
-					JOptionPane.showMessageDialog(null,"El sitio es de: " +   jugadorPagado + "\n" + "Has pagado de renta " + tablero.renta(jugador[actual].damePosicion()) + " Te queda " + jugador[actual].dameDinero() + "€");
+					JOptionPane.showMessageDialog(null,"El sitio es de:  " +   jugadorPagado + "\n" + "Has pagado de renta " + tablero.renta(jugador[actual].damePosicion()) + " Te queda " + jugador[actual].dameDinero() + "€");
 				pagado = false;
 				}
 				}else {

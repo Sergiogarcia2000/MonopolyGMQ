@@ -20,7 +20,7 @@ public class Dados {
 	}
 	
 	public String dameDatosDados() {
-		return "Primer dado: "+ primerDado + "\n" + "Segundo dado: " + segundoDado + "\n" + "El resultado es: " + resultado;
+		return "Primer dado: "+ primerDado + "\n" + "Segundo dado: " + segundoDado + "\n" + "El resultado es:  " + resultado;
 		
 	}
 	public int dameResulDados(){
