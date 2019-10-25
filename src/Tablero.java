@@ -17,8 +17,8 @@ public class Tablero {
 		for (int i = 0; i < lugares.length; i++) {
 			
 			table.add(new Casillas(lugares[i], Precio, i, Compra));
-			Precio = Precio + 100;
-			Compra = Compra + 50;
+			Precio = Precio + 50;
+			Compra = Compra + 100;
 		}
 		
 	
