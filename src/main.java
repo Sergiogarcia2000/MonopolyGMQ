@@ -7,6 +7,7 @@ public class main {
 		boolean juego= true;
 		boolean pagado= false;
 		int actual;
+		double dadoAleatorio;
 		String jugadorPagado = "";
 		Tablero tablero= new Tablero();
 		Dados dado = new Dados();
@@ -19,12 +20,12 @@ public class main {
 		for (int i = 0 ; i <= numJugadores-1 ; i++) {
 			
 			jugador[i] = new Jugadores(JOptionPane.showInputDialog("Nombre del jugador " + (i+1)));
-			//for(int j = 0; j <= 39;j++) {
-				//jugador[i].addBadCasilla(j);
-			//}
 		}
 			//elige aleatoriamente al primer jugador en empezar
-		actual =(int)Math.random()*numJugadores;
+		dadoAleatorio =Math.random()*numJugadores;
+		actual=(int)dadoAleatorio;
+		
+		System.out.println(actual);
 		while (juego) {
 			JOptionPane.showMessageDialog(null,"Turno del jugador " + jugador[actual].dameNombre());
 			
