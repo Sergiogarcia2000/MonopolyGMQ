@@ -7,11 +7,12 @@ public class main {
 		boolean juego= true;
 		boolean pagado= false;
 		int actual;
+		int casillaInicio = 2000;
 		double dadoAleatorio;
 		String jugadorPagado = "";
 		Tablero tablero= new Tablero();
 		Dados dado = new Dados();
-		Jugadores[] jugador = new Jugadores[5];
+		Jugadores[] jugador = new Jugadores[8];
 		
 		//Pedir al usuario cuantos jugadores vana  jugar
 		int numJugadores = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantos jugadores?"));	
@@ -38,7 +39,7 @@ public class main {
 			dado.tirarDados();
 			//escribo los datos de los dados
 			if(opciones == 1) {
-				JOptionPane.showMessageDialog(null,"Su dinero actual es " + jugador[actual].dameDinero());
+				JOptionPane.showMessageDialog(null,"Su dinero actual es " + jugador[actual].dameDinero() + "€" );
 			}
 			else if(opciones == 2) {
 				JOptionPane.showMessageDialog(null,"Su casillas son:  ");
@@ -51,7 +52,25 @@ public class main {
 			JOptionPane.showMessageDialog(null,dado.dameDatosDados());
 			//System.out.println(dado.dameDatosDados());
 			//cambio la `posicion
-			jugador[actual].editarPosicion(dado.dameResulDados()+jugador[actual].damePosicion());
+			if(jugador[actual].dameEncarcelado() == false) {
+				jugador[actual].editarPosicion(dado.dameResulDados()+jugador[actual].damePosicion());
+				
+			}else {
+				int Carcel = JOptionPane.showOptionDialog(null, "Desea pagar la tasa de libertad", "Encarcelado", JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Pagar 500€","Saltar turno"}, null);	
+				if(Carcel == 0) {
+					jugador[actual].editarDinero(jugador[actual].dameDinero() - 500);
+					jugador[actual].editarPosicion(dado.dameResulDados()+jugador[actual].damePosicion());
+					jugador[actual].editarEncarcelado(false);
+				}else if(Carcel == 1) {
+					jugador[actual].sumarTurnoCarcel();
+				}else if(jugador[actual].dameTurnoCarcel() == 3) {
+					JOptionPane.showMessageDialog(null,"Ya no puedes saltar mas turnos" + "\n" + "Se le cobrara la tasa de 500€");
+					jugador[actual].editarDinero(jugador[actual].dameDinero() - 500);
+					jugador[actual].editarPosicion(dado.dameResulDados()+jugador[actual].damePosicion());
+					jugador[actual].resetTurnoCarcel();
+					jugador[actual].editarEncarcelado(false);
+				}
+			}
 			//si la casilla es superior a 40 empieza de nuevo
 			break;
 			}}
@@ -97,17 +116,31 @@ public class main {
 				pagado = false;
 				}
 				}else {
-					int comprar = JOptionPane.showOptionDialog(null, tablero.informacion(jugador[actual].damePosicion()) + "\n"+"¿Quiere comprar la casilla?", "Casilla sin comprar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Si", "No"}, null);	 
+					
+					if (jugador[actual].damePosicion() == 0) {
+						JOptionPane.showMessageDialog(null, "Estas en  Inicio" + "\n" + "Ganas 2000€");
+						jugador[actual].editarDinero(jugador[actual].dameDinero() + casillaInicio);	
+					}else if(jugador[actual].damePosicion() == 9 &&  jugador[actual].dameEncarcelado() == false) {
+						JOptionPane.showMessageDialog(null, "Estas en  Carcel" + "\n" + "Pero solo de visita");
+					}		
+					else if(jugador[actual].damePosicion() == 29) {
+						JOptionPane.showMessageDialog(null, "Vas directo a la carcel");
+						jugador[actual].editarPosicion(9);
+						jugador[actual].editarEncarcelado(true);
+					}else {
+					
+						int comprar = JOptionPane.showOptionDialog(null, tablero.informacion(jugador[actual].damePosicion()) + "\n"+"¿Quiere comprar la casilla?", "Casilla sin comprar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Si", "No"}, null);	 
 				
-					if(comprar == 0) {
+						if(comprar == 0) {
 					
-						jugador[actual].editarDinero(jugador[actual].dameDinero()- tablero.damePrecioCompra(jugador[actual].damePosicion()));
+							jugador[actual].editarDinero(jugador[actual].dameDinero()- tablero.damePrecioCompra(jugador[actual].damePosicion()));
 					
-						tablero.editarComprada(jugador[actual].damePosicion());
-						jugador[actual].addCasilla(jugador[actual].damePosicion(),jugador[actual].dameIndex());
+							tablero.editarComprada(jugador[actual].damePosicion());
+							jugador[actual].addCasilla(jugador[actual].damePosicion(),jugador[actual].dameIndex());
 					
-						JOptionPane.showMessageDialog(null,"Comprada" + "\n" + "Te queda "+ jugador[actual].dameDinero() + "€");
-				}
+							JOptionPane.showMessageDialog(null,"Comprada" + "\n" + "Te queda "+ jugador[actual].dameDinero() + "€");
+						}
+						}
 			}
 			
 			

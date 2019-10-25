@@ -6,12 +6,15 @@ public class Jugadores {
 	private int posicion;
 	private int [] posicionesEnPropiedad = new int[40];
 	private int indexJ;
+	private int turnoCarcel;
+	private boolean encarcelado= false;
 	//Constructor
 	public Jugadores(String nombre) {
 		this.nombre=nombre;
 		dinero = 15000;
 		posicion = 0;
 		indexJ = -1;
+		turnoCarcel = 0;
 	}
 	//Setter para editar el dinero
 	public void editarDinero(int dinero) {
@@ -23,6 +26,15 @@ public class Jugadores {
 	}
 	public void addCasilla(int posicion, int index) {
 		posicionesEnPropiedad[index] = posicion;	
+	}
+	public void editarEncarcelado(boolean state) {
+		encarcelado=state;
+	}
+	public void sumarTurnoCarcel() {
+		turnoCarcel++;
+	}
+	public void resetTurnoCarcel() {
+		turnoCarcel = 0;
 	}
 	public int dameIndex() {
 		indexJ+=1;
@@ -43,5 +55,11 @@ public class Jugadores {
 	public int damePosicion() {
 		return posicion;
 		
+	}
+	public int dameTurnoCarcel() {
+		return turnoCarcel;
+	}
+	public boolean dameEncarcelado() {
+		return encarcelado;
 	}
 }
