@@ -36,6 +36,11 @@ public class Tablero {
 		
 	}
 	
+	
+	public String informacion(int pos) {
+		return table.get(pos).toString();
+	}
+	
 	// Método que devuelve booleana dependiendo del estado de la casilla
 	public boolean comprada(int pos) {
 		return table.get(pos).estaComprada();
