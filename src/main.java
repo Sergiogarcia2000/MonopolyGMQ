@@ -7,8 +7,12 @@ public class main {
 		boolean juego= true;
 		boolean pagado= false;
 		int actual;
+		int cartaElegida;
+		int posicionElegida;
 		int casillaInicio = 2000;
 		double dadoAleatorio;
+		double cartaAleatoria;
+		double posicionAleatoria;
 		String jugadorPagado = "";
 		Tablero tablero= new Tablero();
 		Dados dado = new Dados();
@@ -25,6 +29,8 @@ public class main {
 			//elige aleatoriamente al primer jugador en empezar
 		dadoAleatorio =Math.random()*numJugadores;
 		actual=(int)dadoAleatorio;
+		
+		
 		
 		System.out.println(actual);
 		while (juego) {
@@ -77,6 +83,9 @@ public class main {
 			if(jugador[actual].damePosicion() >= 40) {
 				
 				jugador[actual].editarPosicion( jugador[actual].damePosicion() - 40 );
+				JOptionPane.showMessageDialog(null, "Cobras 2000€ por pasar por la casilla de inicio");
+				jugador[actual].editarDinero(jugador[actual].dameDinero() + casillaInicio);
+				
 			}
 			//consultar datos de la posicion
 			tablero.info(jugador[actual].damePosicion());
@@ -127,7 +136,45 @@ public class main {
 						JOptionPane.showMessageDialog(null, "Vas directo a la carcel");
 						jugador[actual].editarPosicion(9);
 						jugador[actual].editarEncarcelado(true);
+					}else if(jugador[actual].damePosicion() == 19){
+						
+						cartaAleatoria = Math.random()*5;
+						cartaElegida = (int)cartaAleatoria;
+						
+						
+						JOptionPane.showMessageDialog(null, "Has caido en carta aleatoria");
+						
+						if (cartaElegida == 0) {
+							JOptionPane.showMessageDialog(null, "Ganas 2500€");
+							jugador[actual].editarDinero(jugador[actual].dameDinero() + 2500);
+							
+						}else if (cartaElegida == 1) {
+							JOptionPane.showMessageDialog(null, "Pierdes 2500€");
+							jugador[actual].editarDinero(jugador[actual].dameDinero() - 2500);
+							
+						}else if (cartaElegida == 2) {
+							JOptionPane.showMessageDialog(null, "Vas directo a la cárcel");
+							jugador[actual].editarPosicion(9);
+							jugador[actual].editarEncarcelado(true);
+							
+						}else if (cartaElegida == 3) {
+							JOptionPane.showMessageDialog(null, "Ve al inicio");
+							jugador[actual].editarPosicion(0);
+							jugador[actual].editarDinero(jugador[actual].dameDinero() + casillaInicio);
+						
+							
+						}else if (cartaElegida == 4) {
+							JOptionPane.showMessageDialog(null, "Vas a una casilla aleatoria sin que ocurra nada");
+
+							posicionAleatoria = Math.random()*40;
+							posicionElegida = (int)posicionAleatoria;
+							
+							jugador[actual].editarPosicion(posicionElegida);
+						}
+						
+						
 					}else {
+					
 					
 						int comprar = JOptionPane.showOptionDialog(null, tablero.informacion(jugador[actual].damePosicion()) + "\n"+"¿Quiere comprar la casilla?", "Casilla sin comprar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Si", "No"}, null);	 
 				
