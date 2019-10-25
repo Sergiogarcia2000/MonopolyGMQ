@@ -57,7 +57,7 @@ public class Casillas {
 	// Método que permite imprimir como string toda la informacion de una casilla
 	@Override
 	public String toString() {
-		return casilla + " El Precio de compra: " + precioCompra + " Posición: " + posicion + " Está comprada: " + estaComprada + " nivel: " + nivel;
+		return "El sitio es: " + casilla + " El Precio de compra: " + precioCompra + " Casas: " + nivel;
 	}
 	
 }
