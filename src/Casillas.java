@@ -36,6 +36,10 @@ public class Casillas {
 		return this.nivel;
 	}
 	
+	public String dameCasilla() {
+		return this.casilla;
+	}
+	
 	public void mejorarNivel() {
 		this.nivel++;
 		this.renta = this.renta * ((this.nivel + 10) / 10);
