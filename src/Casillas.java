@@ -3,15 +3,17 @@ public class Casillas {
 
 	private String casilla;
 	private int renta;
+	private int precioCompra;
 	private int posicion;
 	private int nivel = 1;
 	private boolean estaComprada = false;
 	
 	// Método constructor
-	public Casillas(String casilla, int renta, int posicion) {
+	public Casillas(String casilla, int renta, int posicion, int precioCompra) {
 		
 		this.casilla = casilla;
 		this.renta = renta;
+		this.precioCompra = precioCompra;
 		this.posicion = posicion;
 		
 	}
@@ -26,13 +28,17 @@ public class Casillas {
 		return this.renta;
 	}
 	
+	public int damePrecioCompra() {
+		return this.precioCompra;
+	}
+	
 	public int dameNivel() {
 		return this.nivel;
 	}
 	
 	public void mejorarNivel() {
 		this.nivel++;
-		this.renta = this.renta * this.nivel;
+		this.renta = this.renta * ((this.nivel + 10) / 10);
 	}
 	
 	
