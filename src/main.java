@@ -29,16 +29,32 @@ public class main {
 		while (juego) {
 			JOptionPane.showMessageDialog(null,"Turno del jugador " + jugador[actual].dameNombre());
 			
+			while (juego) {
+				
+			
 			//Crear panel que dice tirar dados
-			JOptionPane.showOptionDialog(null, null, "Tire los dados", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Tirar los dados"}, null);	
+			int opciones= JOptionPane.showOptionDialog(null,"Jugador que deseas hacer ", "Opciones ", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Tirar los dados","Consultar dinero","Consultar posiciones en propiedad"}, null);	
 			//Cambio el valor de los dados
 			dado.tirarDados();
 			//escribo los datos de los dados
+			if(opciones == 1) {
+				JOptionPane.showMessageDialog(null,"Su dinero actual es " + jugador[actual].dameDinero());
+			}
+			else if(opciones == 2) {
+				JOptionPane.showMessageDialog(null,"Su casillas son:  ");
+				for(int i = 0; i <= 39; i++) {
+					if(jugador[actual].dameCasillaEnPropiedad(i) >= 1)
+					JOptionPane.showMessageDialog(null, tablero.dameCasilla(jugador[actual].dameCasillaEnPropiedad(i)));
+				}
+			}
+			else if(opciones == 0) {
 			JOptionPane.showMessageDialog(null,dado.dameDatosDados());
 			//System.out.println(dado.dameDatosDados());
 			//cambio la `posicion
 			jugador[actual].editarPosicion(dado.dameResulDados()+jugador[actual].damePosicion());
 			//si la casilla es superior a 40 empieza de nuevo
+			break;
+			}}
 			if(jugador[actual].damePosicion() >= 40) {
 				
 				jugador[actual].editarPosicion( jugador[actual].damePosicion() - 40 );
@@ -53,7 +69,8 @@ public class main {
 				for (int i = 0 ; i <= numJugadores-1 ; i++) {
 					for(int j = 0;j <= 39;j++) {
 						if(jugador[actual].dameCasillaEnPropiedad(j) == jugador[actual].damePosicion()) {
-							System.out.println("La casilla es tuya");
+							JOptionPane.showMessageDialog(null, "La casilla"+ tablero.dameCasilla(jugador[actual].damePosicion()) + " es tuya");
+							
 							if (tablero.dameNivel(jugador[actual].damePosicion()) <= 3) {
 
 								int mejorar = JOptionPane.showOptionDialog(null, tablero.informacion(jugador[actual].damePosicion())+ "Desea Comprar la casilla", "Casilla sin mejorar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Si", "No"}, null);	 
@@ -76,7 +93,7 @@ public class main {
 					
 				}
 				if (pagado) {
-					JOptionPane.showMessageDialog(null,"El sitio es de:  " +   jugadorPagado + "\n" + "Has pagado de renta " + tablero.renta(jugador[actual].damePosicion()) + " Te queda " + jugador[actual].dameDinero() + "€");
+					JOptionPane.showMessageDialog(null,"Sitio: " + tablero.dameCasilla(jugador[actual].damePosicion()) + "\n" + "El sitio es de:  " +   jugadorPagado + "\n" + "Has pagado de renta " + tablero.renta(jugador[actual].damePosicion()) + " Te queda " + jugador[actual].dameDinero() + "€");
 				pagado = false;
 				}
 				}else {
