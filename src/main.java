@@ -5,6 +5,7 @@ public class main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stu
 		boolean juego= true;
+		boolean pagado= false;
 		int dadoComienzo;
 		Tablero tablero= new Tablero();
 		Dados dado = new Dados();
@@ -49,20 +50,38 @@ public class main {
 				
 				for (int i = 0 ; i <= numJugadores-1 ; i++) {
 					for(int j = 0;j <= 39;j++) {
-						if (jugador[i].dameCasillaEnPropiedad(j) == jugador[dadoComienzo].damePosicion()){
-							jugador[i].editarDinero(jugador[i].dameDinero()+ tablero.renta(dadoComienzo));
-							jugador[dadoComienzo].editarDinero(jugador[dadoComienzo].dameDinero() - tablero.renta(jugador[dadoComienzo].damePosicion()));
+						if(jugador[dadoComienzo].dameCasillaEnPropiedad(j) == jugador[dadoComienzo].damePosicion()) {
+							System.out.println("La casilla es suya");
+							if (tablero.dameNivel(jugador[dadoComienzo].damePosicion()) <= 3) {
+
+								int mejorar = JOptionPane.showOptionDialog(null, "¿Quiere mejorar la casilla?", "Casilla sin mejorar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Si", "No"}, null);	 
+								
+								if (mejorar == 0) {
+									tablero.mejorarNivel(jugador[dadoComienzo].damePosicion());
+									System.out.println("Se ha mejorado la casilla");
+									break;
+								}
+					
+							}
+						}
+						else if (jugador[i].dameCasillaEnPropiedad(j) == jugador[dadoComienzo].damePosicion()){
+								jugador[i].editarDinero(jugador[i].dameDinero()+ tablero.renta(dadoComienzo));
+								jugador[dadoComienzo].editarDinero(jugador[dadoComienzo].dameDinero() - tablero.renta(jugador[dadoComienzo].damePosicion()));
+								pagado = true;
 						}
 					}
 					
 				}
+				if (pagado) {
 				System.out.println("Has pagado de renta " + tablero.renta(jugador[dadoComienzo].damePosicion()) + " Te queda " + jugador[dadoComienzo].dameDinero() + "€");	
+				pagado = false;
+				}
 				}else {
 					int comprar = JOptionPane.showOptionDialog(null, "¿Quiere comprar la casilla?", "Casilla sin comprar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Si", "No"}, null);	 
 				
 					if(comprar == 0) {
 					
-						jugador[dadoComienzo].editarDinero(jugador[dadoComienzo].dameDinero()- tablero.renta(jugador[dadoComienzo].damePosicion()));
+						jugador[dadoComienzo].editarDinero(jugador[dadoComienzo].dameDinero()- tablero.damePrecioCompra(jugador[dadoComienzo].damePosicion()));
 					
 						tablero.editarComprada(jugador[dadoComienzo].damePosicion());
 						jugador[dadoComienzo].addCasilla(jugador[dadoComienzo].damePosicion(),jugador[dadoComienzo].dameIndex());
@@ -72,15 +91,7 @@ public class main {
 				}
 			}
 			
-			if (tablero.comprada(jugador[dadoComienzo].damePosicion()) == true && tablero.dameNivel(jugador[dadoComienzo].damePosicion()) <= 3) {
-
-				int mejorar = JOptionPane.showOptionDialog(null, "¿Quiere mejorar la casilla?", "Casilla sin mejorar", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Si", "No"}, null);	 
-				
-				if (mejorar == 0) {
-					tablero.mejorarNivel(jugador[dadoComienzo].damePosicion());
-				}
-	
-			}
+			
 			
 			
 			if(dadoComienzo < numJugadores-1) {
