@@ -34,6 +34,7 @@ public class main {
 		
 		System.out.println(actual);
 		while (juego) {
+			if(jugador[actual].dameBancarrota() == false) {
 			JOptionPane.showMessageDialog(null,"Turno del jugador " + jugador[actual].dameNombre());
 			
 			while (juego) {
@@ -139,11 +140,11 @@ public class main {
 					}else if(jugador[actual].damePosicion() == 9 &&  jugador[actual].dameEncarcelado() == true) {
 						JOptionPane.showMessageDialog(null, "Pues te quedas en la carcel");
 						
-					}else if(jugador[actual].damePosicion() == 29) {
+					}else if(jugador[actual].damePosicion() == 29  ) {
 						JOptionPane.showMessageDialog(null, "Vas directo a la carcel");
 						jugador[actual].editarPosicion(9);
 						jugador[actual].editarEncarcelado(true);
-					}else if(jugador[actual].damePosicion() == 19){
+					}else if(jugador[actual].damePosicion() == 7 || jugador[actual].damePosicion() == 17 || jugador[actual].damePosicion() == 22 || jugador[actual].damePosicion() == 33){
 						
 						cartaAleatoria = Math.random()*5;
 						cartaElegida = (int)cartaAleatoria;
@@ -200,11 +201,16 @@ public class main {
 			
 			
 			
-			if(actual < numJugadores-1) {
-				actual+=1;
-			}else { 
-				actual=0;
+			
+			}else {
+				if(jugador[actual].dameMsgBancarrota())
+					JOptionPane.showMessageDialog(null,"El jugador " + jugador[actual].dameNombre() + " esta en bancarrota");
+				jugador[actual].editarMsgBancarrota(false); 
 			}
+		}if(actual < numJugadores-1) {
+			actual+=1;
+		}else { 
+			actual=0;
 		}
 		
 		

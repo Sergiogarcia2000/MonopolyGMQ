@@ -8,6 +8,8 @@ public class Jugadores {
 	private int indexJ;
 	private int turnoCarcel;
 	private boolean encarcelado= false;
+	private boolean bancarrota=false;
+	private boolean msgBancarrota= true;
 	//Constructor
 	public Jugadores(String nombre) {
 		this.nombre=nombre;
@@ -36,6 +38,12 @@ public class Jugadores {
 	public void resetTurnoCarcel() {
 		turnoCarcel = 0;
 	}
+	public void editarBancarrota(boolean state) {
+		bancarrota = state;
+	}
+	public void editarMsgBancarrota(boolean state) {
+		msgBancarrota = state;
+	}
 	public int dameIndex() {
 		indexJ+=1;
 		return indexJ;
@@ -61,5 +69,11 @@ public class Jugadores {
 	}
 	public boolean dameEncarcelado() {
 		return encarcelado;
+	}
+	public boolean dameBancarrota() {
+		return bancarrota;
+	}
+	public boolean dameMsgBancarrota() {
+		return msgBancarrota;
 	}
 }
