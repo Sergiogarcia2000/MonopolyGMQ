@@ -25,7 +25,8 @@ public class Tablero {
 	}
 	
 	
-	// Método que muestra la informacion de la casilla
+	// Método que muestra todos los parámetros de una casilla
+	
 	public void info(int pos) {
 		
 		for (Casillas c: table) {
@@ -36,37 +37,56 @@ public class Tablero {
 		
 	}
 	
+	// Método que muestra la informacion necesaria de la casilla
+	
 	
 	public String informacion(int pos) {
 		return table.get(pos).toString();
 	}
 	
 	// Método que devuelve booleana dependiendo del estado de la casilla
+
 	public boolean comprada(int pos) {
 		return table.get(pos).estaComprada();
 	}
 	
 	// Método que devuelve la renta de la casilla
+	
 	public int renta(int pos) {
 		return table.get(pos).dameRenta();
 	}
+	
+	// Método que devuelve el precio de compra
 	
 	public int damePrecioCompra(int pos) {
 		return table.get(pos).damePrecioCompra();
 	}
 	
+	// Método que devuelve el nivel de la posición
+	
 	public int dameNivel(int pos) {
 		return table.get(pos).dameNivel();
 	}
+	
+	// Método que reinicia el nivel de una casilla
+	
+	public void reiniciarNivel(int pos) {
+		table.get(pos).reiniciarNivel();
+	}
+	
+	// Método que devuelve el nombre de la casilla
 	
 	public String dameCasilla(int pos) {
 		return table.get(pos).dameCasilla();
 	}
 	
 	// Método que edita la casilla a comprada
+	
 	public void editarComprada(int pos) {
 		table.get(pos).editarComprada();
 	}
+	
+	// Método que mejora el nivel de una casilla
 	
 	public void mejorarNivel(int pos) {
 		table.get(pos).mejorarNivel();
