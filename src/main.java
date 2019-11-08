@@ -4,6 +4,9 @@ public class main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stu
+		
+		
+		// VARIABLES DE JUEGO
 		boolean juego= true;
 		boolean esTuya= false;
 		boolean pagado= false;
@@ -36,18 +39,31 @@ public class main {
 		System.out.println(actual);
 		while (juego) {
 			
+			// Mensaje del jugador actual 
+			
+			JOptionPane.showMessageDialog(null,"Turno del jugador " + jugador[actual].dameNombre());
+			
+			// Comprobar si el usuario está en bancarrota, si es así cambiar su estado
+			
 			if (jugador[actual].dameVidas() == 1) {
 				jugador[actual].editarBancarrota(true);
 			}
 			
+			// Comprobar si su dinero está en negativo, si es así informar de los turnos que le quedan y restarle un turno
+			
 			if(jugador[actual].dameDinero() < 0) {
 				JOptionPane.showMessageDialog(null, "Esta de por debajo de 0€, si no lo recupera en " + jugador[actual].dameVidas() + " turnos quedará en bancarrota y se liberaran sus posesiones." );
 				jugador[actual].restarVidas();
+				
+			// Si se consigue poner en positivo se le reinician los turnos
+				
+			}else {
+				jugador[actual].resetVidas();
 			}
 			
 			
 			
-			
+			// Si tan solo queda 1 jugador terminar la partida
 			
 			if(jugador[actual].dameBancarrota() == false) {
 				
@@ -61,7 +77,7 @@ public class main {
 			
 				while (juego) {
 				
-					JOptionPane.showMessageDialog(null,"Turno del jugador " + jugador[actual].dameNombre());
+					
 					
 					//Crear panel que dice tirar dados
 					int opciones= JOptionPane.showOptionDialog(null,"Jugador que deseas hacer ", "Opciones ", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Tirar los dados","Consultar dinero","Consultar posiciones en propiedad"}, null);	
@@ -71,6 +87,9 @@ public class main {
 					if(opciones == 1) {
 						JOptionPane.showMessageDialog(null,"Su dinero actual es " + jugador[actual].dameDinero() + "€" );
 					}
+					
+					// Mostrar las casillas que tiene el jugador
+					
 					else if(opciones == 2) {
 						for(int i = 0; i <= 39; i++) {
 							if(jugador[actual].dameCasillaEnPropiedad(i) >= 1) {
@@ -87,21 +106,36 @@ public class main {
 					//cambio la `posicion
 					if(jugador[actual].dameEncarcelado() == false) {
 						jugador[actual].editarPosicion(dado.dameResulDados()+jugador[actual].damePosicion());
+					
+					// Encarcelar al jugador
 						
 					}else {
 						int Carcel = JOptionPane.showOptionDialog(null, "Desea pagar la tasa de libertad", "Encarcelado", JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE, null,new Object[] {"Pagar 500€","Saltar turno"}, null);	
+						
+						// Opciones dentro de la carcel
+						
+						// Salir de la carcel pagando 500€
 						if(Carcel == 0) {
+							
 							jugador[actual].editarDinero(jugador[actual].dameDinero() - 500);
 							jugador[actual].editarPosicion(dado.dameResulDados()+jugador[actual].damePosicion());
 							jugador[actual].editarEncarcelado(false);
+							
+						// Mantenerse en la carcel	
 						}else if(Carcel == 1) {
+							
 							jugador[actual].sumarTurnoCarcel();
+							
+							
+						// Si lleva 3 turnos en la carcel sacarlo y cobrarle los 500€
 						}if(jugador[actual].dameTurnoCarcel() == 3) {
+							
 							JOptionPane.showMessageDialog(null,"Ya no puedes saltar mas turnos" + "\n" + "Se le cobrara la tasa de 500€");
 							jugador[actual].editarDinero(jugador[actual].dameDinero() - 500);
 							jugador[actual].editarPosicion(dado.dameResulDados()+jugador[actual].damePosicion());
 							jugador[actual].resetTurnoCarcel();
 							jugador[actual].editarEncarcelado(false);
+							
 						}
 					}
 					//si la casilla es superior a 40 empieza de nuevo
@@ -132,7 +166,7 @@ public class main {
 										jugadorPagado = jugador[i].dameNombre();
 								}
 							}
-							
+						// Si la casilla es tuya
 						} if(esTuya) {
 							JOptionPane.showMessageDialog(null, "La casilla"+ tablero.dameCasilla(jugador[actual].damePosicion()) + " es tuya");
 							
@@ -153,6 +187,9 @@ public class main {
 							JOptionPane.showMessageDialog(null,"Sitio: " + tablero.dameCasilla(jugador[actual].damePosicion()) + "\n" + "El sitio es de:  " +   jugadorPagado + "\n" + "Has pagado de renta " + tablero.renta(jugador[actual].damePosicion()) + " Te queda " + jugador[actual].dameDinero() + "€");
 						pagado = false;
 						}
+						
+						// Posiciones especiales
+						
 						}else{
 							
 							if (jugador[actual].damePosicion() == 0) {
@@ -167,7 +204,12 @@ public class main {
 								JOptionPane.showMessageDialog(null, "Vas directo a la carcel");
 								jugador[actual].editarPosicion(9);
 								jugador[actual].editarEncarcelado(true);
+							
+							// Caer en carta aleatoria
+								
 							}else if(jugador[actual].damePosicion() == 7 || jugador[actual].damePosicion() == 17 || jugador[actual].damePosicion() == 22 || jugador[actual].damePosicion() == 33){
+								
+								// Se generan cartas aleatorias
 								
 								cartaAleatoria = Math.random()*5;
 								cartaElegida = (int)cartaAleatoria;
@@ -203,6 +245,7 @@ public class main {
 									jugador[actual].editarPosicion(posicionElegida);
 								}
 								
+						// Comprar la casilla
 								
 						}else {
 						
@@ -220,7 +263,9 @@ public class main {
 							}
 							}
 					}
-				
+			
+					// Bancarrota
+					
 			}else {
 				if(jugador[actual].dameMsgBancarrota()) {
 					JOptionPane.showMessageDialog(null,"El jugador " + jugador[actual].dameNombre() + " esta en bancarrota");
@@ -233,13 +278,14 @@ public class main {
 					jugador[actual].editarMsgBancarrota(false); 
 				}
 				}
-				
-				actual++;
 			}
-		}if(actual < numJugadores-1) {
-			actual+=1;
-		}else { 
-			actual=0;
+			
+			if(actual < numJugadores-1) {
+				actual+=1;
+			}else { 
+				actual=0;
+			}
+			
 		}
 		
 		
