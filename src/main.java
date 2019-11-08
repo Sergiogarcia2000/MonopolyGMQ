@@ -34,6 +34,14 @@ public class main {
 		
 		System.out.println(actual);
 		while (juego) {
+			if(jugador[actual].dameDinero() < 0) {
+				jugador[actual].restarVidas();
+				JOptionPane.showMessageDialog(null, "Esta de por debajo de 0€, si no lo recupera en " + jugador[actual].dameVidas() + " quedara en bancarrota y se liberaran sus posesiones" );
+				
+			}
+			if (jugador[actual].dameVidas() == 0) {
+				jugador[actual].editarBancarrota(true);
+			}
 			if(jugador[actual].dameBancarrota() == false) {
 			JOptionPane.showMessageDialog(null,"Turno del jugador " + jugador[actual].dameNombre());
 			
@@ -203,9 +211,17 @@ public class main {
 			
 			
 			}else {
-				if(jugador[actual].dameMsgBancarrota())
+				if(jugador[actual].dameMsgBancarrota()) {
 					JOptionPane.showMessageDialog(null,"El jugador " + jugador[actual].dameNombre() + " esta en bancarrota");
+				for (int i = 0;i <= 39;i++){
+					jugador[actual].dameCasillaEnPropiedad(i);//eliminar el nivel de estas casillas
+					
+					jugador[actual].resetTodasCasillas(i);//va a borrar todas las casillas de este jugador
+				}
+				}
 				jugador[actual].editarMsgBancarrota(false); 
+				
+				actual++;
 			}
 		}if(actual < numJugadores-1) {
 			actual+=1;

@@ -10,6 +10,7 @@ public class Jugadores {
 	private boolean encarcelado= false;
 	private boolean bancarrota=false;
 	private boolean msgBancarrota= true;
+	private int vidas= 3;
 	//Constructor
 	public Jugadores(String nombre) {
 		this.nombre=nombre;
@@ -47,6 +48,12 @@ public class Jugadores {
 	public void editarMsgBancarrota(boolean state) {
 		msgBancarrota = state;
 	}
+	public void restarVidas() {
+		vidas--;
+	}
+	public void resetVidas() {
+		vidas = 3;
+	}
 	public int dameIndex() {
 		indexJ+=1;
 		return indexJ;
@@ -78,5 +85,8 @@ public class Jugadores {
 	}
 	public boolean dameMsgBancarrota() {
 		return msgBancarrota;
+	}
+	public int dameVidas() {
+		return vidas;
 	}
 }
