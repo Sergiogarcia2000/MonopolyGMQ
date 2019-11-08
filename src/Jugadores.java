@@ -14,7 +14,7 @@ public class Jugadores {
 	//Constructor
 	public Jugadores(String nombre) {
 		this.nombre=nombre;
-		dinero = 15000;
+		dinero = 1000;
 		posicion = 0;
 		indexJ = -1;
 		turnoCarcel = 0;
