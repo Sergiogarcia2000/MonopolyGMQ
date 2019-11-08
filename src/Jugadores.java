@@ -29,6 +29,9 @@ public class Jugadores {
 	public void addCasilla(int posicion, int index) {
 		posicionesEnPropiedad[index] = posicion;	
 	}
+	public void resetTodasCasillas(int index) {
+		posicionesEnPropiedad[index] = -5;
+	}
 	public void editarEncarcelado(boolean state) {
 		encarcelado=state;
 	}
